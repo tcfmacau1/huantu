@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-display: "Fraunces", "Noto Serif TC", "Iowan Old Style", "Palatino Linotype", serif;
+
+  --color-bg: #0e1613;
+  --color-ocean: #10211c;
+  --color-surface: #17211d;
+  --color-surface-2: #1e2c27;
+  --color-fg: #e8efe9;
+  --color-muted: #93a79c;
+  --color-faint: #6e847a;
+  --color-line: #2c3d36;
+  --color-brass: #e4b15a;
+  --color-brass-ink: #1c1408;
+  --color-nodata: #31423b;
+  --color-coast: #07110e;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-brass) 42%, transparent);
+    color: var(--color-fg);
+  }
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.panel-shadow {
+  box-shadow: 0 18px 48px rgb(0 0 0 / 0.38);
+}
+
+.land {
+  transition:
+    fill 240ms ease,
+    opacity 240ms ease;
+}
+
+.map-panning,
+.map-panning * {
+  cursor: grabbing !important;
+}
+
+@keyframes detail-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detail-in {
+  animation: detail-in 220ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .land,
+  .detail-in {
+    animation: none;
+    transition: none;
+  }
+}
